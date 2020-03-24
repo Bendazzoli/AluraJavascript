@@ -3,10 +3,7 @@ var botaoAddPaciente = document.querySelector("#adicionar-paciente");
 botaoAddPaciente.addEventListener("click", function(event) {
     event.preventDefault();
     var formAdicionaPaciente = document.querySelector("#formAdicionaPaciente");
-    var peso = formAdicionaPaciente.peso.value;
-    var altura = formAdicionaPaciente.altura.value;
-    var gordura = formAdicionaPaciente.gordura.value;
-
+    
     var pacienteTr = document.createElement("tr");
     var nomeTd = document.createElement("td");
     var pesoTd = document.createElement("td");
@@ -18,6 +15,7 @@ botaoAddPaciente.addEventListener("click", function(event) {
     pesoTd.textContent = formAdicionaPaciente.peso.value;
     alturaTd.textContent = formAdicionaPaciente.altura.value;
     gorduraTd.textContent = formAdicionaPaciente.gordura.value;
+    imcTd.textContent = calculaImc(formAdicionaPaciente.peso.value, formAdicionaPaciente.altura.value);
 
     pacienteTr.appendChild(nomeTd);
     pacienteTr.appendChild(pesoTd);
