@@ -3,14 +3,18 @@ var botaoAddPaciente = document.querySelector("#adicionar-paciente");
 botaoAddPaciente.addEventListener("click", function(event) {
     event.preventDefault();
 
+    var form = document.querySelector("#formAdicionaPaciente");
+
     //Extrai informacoes do paciente do form
-    var paciente = obtemPacienteDoForm(document.querySelector("#formAdicionaPaciente"));
+    var paciente = obtemPacienteDoForm(form);
     
     //Monta o TR e os TDs
     var pacienteTr = montaTr(paciente);
 
     var tabelaPacientes = document.querySelector("#tabela-pacientes");
-    tabelaPacientes.appendChild(pacienteTr);    
+    tabelaPacientes.appendChild(pacienteTr);
+    
+    form.reset();
 });
 
 function obtemPacienteDoForm(form){
