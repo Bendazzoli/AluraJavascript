@@ -54,7 +54,7 @@ function montaTd(dado, classe){
 
 function validaPaciente(paciente){
     var erros = [];
-    mensagemErro.textContent = "";
+    mensagemErro.innerHTML = "";
 
     if(!validaPeso(paciente.peso)){
         erros.push("Peso informado é inválido!");
