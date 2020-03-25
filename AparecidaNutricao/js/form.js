@@ -64,10 +64,26 @@ function validaPaciente(paciente){
         erros.push("Altura informada é inválida!");
     }
 
+    if(paciente.nome == ""){
+        erros.push("Nome do paciente é um campo obrigatório!");
+    }
+
+    if(paciente.gordura <= 0 || paciente.gordura > 100){
+        erros.push("% de gordura é inválido!");
+    }
+
     if(erros.length > 0){
-        mensagemErro.textContent = erros;
-        mensagemErro.classList.add("paciente-invalido");
+        listaMensagensErros(erros);
         return false;
     }
     return true;
+}
+
+function listaMensagensErros(erros){
+    erros.forEach(function(erro){
+        var li = document.createElement("li");
+        li.textContent = erro;
+        mensagemErro.appendChild(li);
+    });
+    mensagemErro.classList.add("mensagem-erro");
 }
