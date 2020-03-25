@@ -7,7 +7,8 @@ botaoAddPaciente.addEventListener("click", function(event) {
 
     //Extrai informacoes do paciente do form
     var paciente = obtemPacienteDoForm(form);
-
+    
+    var mensagemErro = document.querySelector("#mensagemErro");
     if(!validaPaciente(paciente)){
         return;
     }
@@ -52,13 +53,21 @@ function montaTd(dado, classe){
 }
 
 function validaPaciente(paciente){
+    var erros = [];
+    mensagemErro.textContent = "";
+
     if(!validaPeso(paciente.peso)){
-        alert("Peso informado é inválido! Peso " + paciente.peso);
-        return false;  
+        erros.push("Peso informado é inválido!");
     }
 
     if(!validaAltura(paciente.altura)){
-        alert("Altura informada é inválida! Altura " + paciente.altura);
+        erros.push("Altura informada é inválida!");
+    }
+
+    if(erros.length > 0){
+        mensagemErro.textContent = erros;
+        mensagemErro.classList.add("paciente-invalido");
         return false;
     }
+    return true;
 }
