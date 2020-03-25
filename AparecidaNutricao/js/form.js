@@ -7,6 +7,10 @@ botaoAddPaciente.addEventListener("click", function(event) {
 
     //Extrai informacoes do paciente do form
     var paciente = obtemPacienteDoForm(form);
+
+    if(!validaPaciente(paciente)){
+        return;
+    }
     
     //Monta o TR e os TDs
     var pacienteTr = montaTr(paciente);
@@ -45,4 +49,16 @@ function montaTd(dado, classe){
     td.textContent = dado;
     td.classList.add(classe);
     return td;
+}
+
+function validaPaciente(paciente){
+    if(!validaPeso(paciente.peso)){
+        alert("Peso informado é inválido! Peso " + paciente.peso);
+        return false;  
+    }
+
+    if(!validaAltura(paciente.altura)){
+        alert("Altura informada é inválida! Altura " + paciente.altura);
+        return false;
+    }
 }
