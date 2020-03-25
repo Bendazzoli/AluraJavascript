@@ -147,3 +147,13 @@ button[disabled=disabled], button:disabled {
 	opacity: 0;
 	transition: 0.7s;
 }
+
+#filtrar-tabela{
+	width: 200px;
+	height: 35px;
+	margin-bottom: 10px;
+}
+
+.fadeOutLinha{
+	display: none;
+}
