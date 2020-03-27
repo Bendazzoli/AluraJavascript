@@ -13,9 +13,7 @@ class NegociacaoController{
 
         //Tratando data String para data Date
         var data = new Date(...
-            this._inputData.value.split('-').map((item, indice) => {
-                return item - indice % 2;
-            })
+            this._inputData.value.split('-').map((item, indice) => item - indice % 2)
         );
 
         console.log(data);
@@ -24,6 +22,8 @@ class NegociacaoController{
         let negociacao = new Negociacao(new Date(data),
                                         this._inputQuantidade.value,
                                         this._inputValor.value);
+
+        console.log(negociacao);
 
         //adicionar a negociacao na lista
     }
