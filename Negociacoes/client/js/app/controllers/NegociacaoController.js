@@ -13,7 +13,7 @@ class NegociacaoController{
 
         //Tratando data String para data Date
         var data = new Date(...
-            this._inputData.value.split('-').map(function(item, indice){
+            this._inputData.value.split('-').map((item, indice) => {
                 return item - indice % 2;
             })
         );
