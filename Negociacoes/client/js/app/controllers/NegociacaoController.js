@@ -10,9 +10,18 @@ class NegociacaoController{
 
     adiciona(event){
         event.preventDefault();
+
+        //Tratando data String para data Date
+        var data = new Date(...
+            this._inputData.value.split('-').map(function(item, indice){
+                return item - indice % 2;
+            })
+        );
+
+        console.log(data);
         
         //cria a negociacao
-        let negociacao = new Negociacao(new Date(this._inputData.value.replace(/-/g, ',')),
+        let negociacao = new Negociacao(new Date(data),
                                         this._inputQuantidade.value,
                                         this._inputValor.value);
 
