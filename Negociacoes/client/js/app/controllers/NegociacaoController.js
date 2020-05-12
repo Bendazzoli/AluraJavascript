@@ -35,30 +35,26 @@ class NegociacaoController {
     importaNegociacoes(){
         let service = new NegociacaoService();
         
-        service.obterNegociacaoDaSemana((erro, negociacoes) => {
-            if(erro){
-                this._mensagem.texto = erro;
-                return;
-            }
-            negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            
-            service.obterNegociacaoDaSemanaAnterior((erro, negociacoes) => {
-                if(erro){
-                    this._mensagem.texto = erro;
-                    return;
-                }
+        service.obterNegociacaoDaSemana()
+            .then(negociacoes => {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                
-                service.obterNegociacaoDaSemanaRetrasada((erro, negociacoes) => {
-                    if(erro){
-                        this._mensagem.texto = erro;
-                        return;
-                    }
-                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                    this._mensagem.texto = 'Negociações importadas com sucesso.';
-                });
-            });
-        });
+                this._mensagem.texto = 'Negociações da semana obitda com sucesso.';
+            })
+            .catch(erro => this._mensagem.texto = erro);
+
+        service.obterNegociacaoDaSemanaAnterior()
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações da semana passada obitda com sucesso.';
+            })
+            .catch(erro => this._mensagem.texto = erro);
+
+        service.obterNegociacaoDaSemanaRetrasada()
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações da semana retrasada obitda com sucesso.';
+            })
+            .catch(erro => this._mensagem.texto = erro);
     }
     
     _criaNegociacao() {
