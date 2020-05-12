@@ -34,7 +34,25 @@ class NegociacaoController {
 
     importaNegociacoes(){
         let service = new NegociacaoService();
+
+        Promise.all([service.obterNegociacaoDaSemana(), 
+                     service.obterNegociacaoDaSemanaAnterior(),
+                     service.obterNegociacaoDaSemanaRetrasada()])
+        .then(negociacoes => {
+            negociacoes
+                 // reduce porque o promise da camada service me retorna um array
+                 // de negociações e, o promise.all tbm me retorna um array.
+                 // Nesse caso, ficando um array de arrays. 
+                .reduce((newArray, arrayOfArrays) => newArray.concat(arrayOfArrays), [])
+                .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = 'Negociações importadas com sucesso';
+        })
+        .catch(erro => this._mensagem.texto = erro);
         
+        /*=== Aqui acontecia o problema de ordem das datas, por exemplo, na hora de recarregar
+              não colocava as ordens da semana, semana anterior e semana retrasada.
+              Mesmo usando o promise, não respeitava a ordem que eu desejava.
+
         service.obterNegociacaoDaSemana()
             .then(negociacoes => {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
@@ -54,7 +72,7 @@ class NegociacaoController {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
                 this._mensagem.texto = 'Negociações da semana retrasada obitda com sucesso.';
             })
-            .catch(erro => this._mensagem.texto = erro);
+            .catch(erro => this._mensagem.texto = erro);*/
     }
     
     _criaNegociacao() {
