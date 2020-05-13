@@ -5,6 +5,10 @@ class Negociacao {
         this._data = new Date(data.getTime());
         this._quantidade = quantidade;
         this._valor = valor;
+
+        //Congela o objeto para não ser alterado na mão
+        //não deixa que os atributos não podem sofrer alteração
+        //Garante como se fosse um "private"
         Object.freeze(this);
     }
     

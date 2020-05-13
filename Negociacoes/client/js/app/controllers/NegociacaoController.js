@@ -1,7 +1,6 @@
 class NegociacaoController {
     
     constructor() {
-        
         let $ = document.querySelector.bind(document);
         
         this._inputData = $('#data');
@@ -15,11 +14,10 @@ class NegociacaoController {
        
         this._mensagem = new Bind(
             new Mensagem(), new MensagemView($('#mensagemView')),
-            'texto');       
+            'texto');
     }
     
     adiciona(event) {
-        
         event.preventDefault();
         this._listaNegociacoes.adiciona(this._criaNegociacao());
         this._mensagem.texto = 'Negociação adicionada com sucesso'; 
@@ -27,7 +25,6 @@ class NegociacaoController {
     }
     
     apaga() {
-        
         this._listaNegociacoes.esvazia();
         this._mensagem.texto = 'Negociações apagadas com sucesso';
     }
